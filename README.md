@@ -1,1 +1,1 @@
-Solutions for [Advent of Code 2022](https://adventofcode.com), written in Python.
+Solutions for [Advent of Code 2022](https://adventofcode.com/2022), written in Python.
