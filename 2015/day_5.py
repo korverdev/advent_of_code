@@ -15,6 +15,7 @@ def contains_3_vowels(str_: str) -> bool:
 
     return number_of_vowels >= 3
 
+
 def double_letter(str_: str) -> bool:
     """
 
@@ -55,7 +56,6 @@ def evil_strings(str_: str) -> bool:
     return False
 
 
-
 def nice(str_: str) -> bool:
     """https://adventofcode.com/2015/day/5
     
@@ -72,7 +72,65 @@ def nice(str_: str) -> bool:
     """
     return contains_3_vowels(str_) and double_letter(str_) and not evil_strings(str_)
 
+
+def contains_pair_twice(str_: str) -> bool:
+    """
+    
+    >>> contains_pair_twice("xyxy")
+    True
+    >>> contains_pair_twice("aabcdefgaa")
+    True
+    >>> contains_pair_twice("aaa")
+    False
+    """
+    pairs = [str_[index:index+2] for index in range(len(str_) - 1)]
+    for index, pair in enumerate(pairs):
+        pairs_to_check = pairs[index+2:]
+        if pair in pairs_to_check:
+            return True
+    
+    return False
+
+
+def repeat_with_seperation(str_: str) -> bool:
+    """
+    
+    >>> repeat_with_seperation("xyx")
+    True
+    >>> repeat_with_seperation("abcdefeghi")
+    True
+    >>> repeat_with_seperation("aaa")
+    True
+    """
+    previous_letter = str_[0]
+    ignored_letter = str_[1]
+    for char in str_[2:]:
+        if char == previous_letter:
+            return True
+        
+        previous_letter = ignored_letter
+        ignored_letter = char
+    
+    return False
+
+
+def nice_2(str_: str) -> bool:
+    """
+    
+    >>> nice_2("qjhvhtzxzqqjkmpb")
+    True
+    >>> nice_2("xxyxx")
+    True
+    >>> nice_2("uurcxstgmygtbstg")
+    False
+    >>> nice_2("ieodomkazucvgmuy")
+    False
+    """
+    return contains_pair_twice(str_) and repeat_with_seperation(str_)
+
+
 if __name__ == "__main__":
+    contains_pair_twice("xyxy")
     print("Provide puzzle input:")
 
     strs = []
@@ -85,5 +143,9 @@ if __name__ == "__main__":
         pass
 
     print("Part 1:")
-    strs = [str_ for str_ in strs if nice(str_)]
-    print(len(strs))
+    strs_1 = [str_ for str_ in strs if nice(str_)]
+    print(len(strs_1))
+
+    print("Part 2:")
+    strs_2 = [str_ for str_ in strs if nice_2(str_)]
+    print(len(strs_2))
