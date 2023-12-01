@@ -130,7 +130,6 @@ def nice_2(str_: str) -> bool:
 
 
 if __name__ == "__main__":
-    contains_pair_twice("xyxy")
     print("Provide puzzle input:")
 
     strs = []
