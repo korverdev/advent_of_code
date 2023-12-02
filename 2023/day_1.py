@@ -1,3 +1,6 @@
+from re import findall
+
+
 def calibration_value(str_: str) -> int:
     """
     
@@ -18,6 +21,57 @@ def calibration_value(str_: str) -> int:
     return int(two_digit_number)
 
 
+def calibration_value_2(str_: str) -> int:
+    """
+
+    # >>> calibration_value_2("two1nine")
+    # 29
+    # >>> calibration_value_2("eightwothree")
+    # 83
+    # >>> calibration_value_2("abcone2threexyz")
+    # 13
+    # >>> calibration_value_2("xtwone3four")
+    # 24
+    # >>> calibration_value_2("4nineeightseven2")
+    # 42
+    # >>> calibration_value_2("zoneight234")
+    # 14
+    # >>> calibration_value_2("7pqrstsixteen")
+    # 76
+    >>> calibration_value_2("5threeeightwor")
+    52
+    """
+    numbers = {
+        "zero": 0,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+    }
+    letters_regex = "|".join(numbers.keys())
+    number_regex = "[0-9]"
+    regex = f"(?=({letters_regex}|{number_regex}))"
+    
+    numbers_in_str = findall(regex, str_)
+    digits = []
+    for number in numbers_in_str:
+        if number in numbers.keys():
+            digits.append(numbers[number])
+        else:
+            digits.append(number)
+
+    first_digit = digits[0]
+    last_digit = digits[-1]
+
+    two_digit_number = f"{first_digit}{last_digit}"
+    return int(two_digit_number)
+
+
 if __name__ == "__main__":
     print("Provide puzzle input:")
 
@@ -31,5 +85,9 @@ if __name__ == "__main__":
         pass
 
     print("Part 1:")
-    sum = sum(calibration_value(str_) for str_ in strs)
-    print(sum)
+    result = sum(calibration_value(str_) for str_ in strs)
+    print(result)
+
+    print("Part 2:")
+    result = sum(calibration_value_2(str_) for str_ in strs)
+    print(result)
