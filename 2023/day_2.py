@@ -81,6 +81,48 @@ def play(str_: str) -> int | None:
     return game.id
 
 
+def _minimum(str_: str) -> dict[Color, int]:
+    """Find the minimum number to make the game possible.
+    
+    >>> _minimum("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green")
+    {<Color.red: 1>: 4, <Color.blue: 2>: 6, <Color.green: 3>: 2}
+    >>> _minimum("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue")
+    {<Color.red: 1>: 1, <Color.blue: 2>: 4, <Color.green: 3>: 3}
+    >>> _minimum("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red")
+    {<Color.red: 1>: 20, <Color.blue: 2>: 6, <Color.green: 3>: 13}
+    >>> _minimum("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red")
+    {<Color.red: 1>: 14, <Color.blue: 2>: 15, <Color.green: 3>: 3}
+    >>> _minimum("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green")
+    {<Color.red: 1>: 6, <Color.blue: 2>: 2, <Color.green: 3>: 3}
+    """
+    game = _parse(str_)
+
+    return {
+        Color.red: max(game.red),
+        Color.blue: max(game.blue),
+        Color.green: max(game.green),
+    }
+
+
+def play_2(str_: str) -> int:
+    """
+    
+    >>> play_2("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green")
+    48
+    >>> play_2("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue")
+    12
+    >>> play_2("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red")
+    1560
+    >>> play_2("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red")
+    630
+    >>> play_2("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green")
+    36
+    """
+    minimums = _minimum(str_)
+
+    return minimums[Color.red] * minimums[Color.blue] * minimums[Color.green]
+
+
 if __name__ == "__main__":
     print("Provide puzzle input:")
     
@@ -98,4 +140,10 @@ if __name__ == "__main__":
         game_id = play(str_)
         if game_id is not None:
             result += game_id
+    print(result)
+
+    print("Part 2:")
+    result = 0
+    for str_ in strs:
+        result += play_2(str_)
     print(result)
