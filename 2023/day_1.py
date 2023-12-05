@@ -24,20 +24,20 @@ def calibration_value(str_: str) -> int:
 def calibration_value_2(str_: str) -> int:
     """
 
-    # >>> calibration_value_2("two1nine")
-    # 29
-    # >>> calibration_value_2("eightwothree")
-    # 83
-    # >>> calibration_value_2("abcone2threexyz")
-    # 13
-    # >>> calibration_value_2("xtwone3four")
-    # 24
-    # >>> calibration_value_2("4nineeightseven2")
-    # 42
-    # >>> calibration_value_2("zoneight234")
-    # 14
-    # >>> calibration_value_2("7pqrstsixteen")
-    # 76
+    >>> calibration_value_2("two1nine")
+    29
+    >>> calibration_value_2("eightwothree")
+    83
+    >>> calibration_value_2("abcone2threexyz")
+    13
+    >>> calibration_value_2("xtwone3four")
+    24
+    >>> calibration_value_2("4nineeightseven2")
+    42
+    >>> calibration_value_2("zoneight234")
+    14
+    >>> calibration_value_2("7pqrstsixteen")
+    76
     >>> calibration_value_2("5threeeightwor")
     52
     """
