@@ -23,14 +23,14 @@ def solutions(time: int, distance_record: int) -> int:
 if __name__ == "__main__":
     print("Provide puzzle input:")
     
-    times = input()
-    distances = input()
+    times_input = input()
+    distances_input = input()
 
-    times = times.split(": ")[1]
-    distances = distances.split(": ")[1]
+    times_input = times_input.split(": ")[1]
+    distances_input = distances_input.split(": ")[1]
 
-    times = times.split()
-    distances = distances.split()
+    times = times_input.split()
+    distances = distances_input.split()
 
     times = [int(x) for x in times]
     distances = [int(x) for x in distances]
@@ -45,3 +45,12 @@ if __name__ == "__main__":
         else:
             margin_for_error *= x
     print(margin_for_error)
+
+
+    print("Part 2:")
+    time = "".join(times_input.split())
+    distance = "".join(distances_input.split())
+    time = int(time)
+    distance = int(distance)
+
+    print(solutions(time, distance))
